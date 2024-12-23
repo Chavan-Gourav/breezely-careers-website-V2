@@ -1,11 +1,11 @@
-from flask import Flask , render_template, jsonify, abort
-from database import load_jobs_from_db, load_job_from_db
+from flask import Flask , render_template, request, abort
+from database import load_jobs_from_db, load_job_from_db, add_application_to_db
+
 
 app = Flask(__name__)
 
 
 
-# Sample job data
 jobs = load_jobs_from_db()
 @app.route('/')
 def hello_breezely(): 
@@ -21,6 +21,16 @@ def show_job(id):
     return render_template('jobpage.html', job=job)
 
 
+@app.route('/job/<id>/apply', methods=['POST']) 
+def apply_to_job(id):
+    data = request.form
+    job = load_job_from_db(id)
+    add_application_to_db(id, data)
+    # store this in the DB
+    # send an eamil
+    # display acknowledgment 
+    return render_template('application_submitted.html', application=data, job=job)
+    
 
 
 

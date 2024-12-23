@@ -42,6 +42,28 @@ def load_job_from_db(id):
 
 
 
+def add_application_to_db(job_id, data):
+    try:
+        with engine.connect() as conn:
+            query = text('INSERT INTO applications (job_id, full_name, email, linkedin_url, resume_url) '
+                         'VALUES (:job_id, :full_name, :email, :linkedin_url, :resume_url)')
+            
+            # Pass parameters as a dictionary
+            conn.execute(query, {
+                'job_id': job_id,
+                'full_name': data['full_name'],
+                'email': data['email'],
+                'linkedin_url': data['linkedin_url'],
+                'resume_url': data['resume']
+            })
+            
+    
+            conn.commit()
+
+    except Exception as e:
+        print(f"Error occurred while inserting application: {e}")
+        
+
         
 
    

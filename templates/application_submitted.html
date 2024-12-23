@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Submitted</title>
+    {% include 'bootstrap.html' %}
+</head>
+<body>
+    {% include 'nav.html' %}
+    {% include 'banner.html' %}
+
+    <div class="container mt-5">
+        <h1 class="text-center mt-2 mb-4 text-primary">Breezely Careers</h1>
+
+        <p class="lead">Your application for the role of <strong>{{ job['title'] }}</strong> at Breezely has been submitted.</p>
+
+        <b>Full Name:</b>
+        <div class="text-muted mb-3">{{ application['full_name'] }}</div>
+
+        <b>Email:</b>
+        <div class="text-muted mb-3">{{ application['email'] }}</div>
+
+        <b>LinkedIn URL:</b>
+        <div class="text-muted mb-3">
+            <a href="{{ application['linkedin_url'] }}" target="_blank">{{ application['linkedin_url'] }}</a>
+        </div>
+
+        <b>Resume URL:</b>
+        <div class="text-muted">
+            <a href="{{ application['resume'] }}" target="_blank">{{ application['resume'] }}</a>
+        </div>
+    </div>
+
+    {% include 'footer.html' %}
+</body>
+</html>
